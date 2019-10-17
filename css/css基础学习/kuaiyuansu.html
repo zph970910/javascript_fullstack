@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>块元素</title>
+    <style type="text/css">
+    div{width: 500px;height: 40px;background: #0f0;display: inline;}
+    p{width: 1000px;height: 60px;background: #f00;}
+    h1{width: 800px;height: 60px;background: #00f;}
+    a{width: 500px;height: 500px;background: pink;margin: 50px;/*padding: 50px;*/border: 50px solid #000;
+    display: inline-block; 
+    text-align: center;   
+    }
+    b{width: 300px;height: 300px;background: #ff0;
+    display: inline-block;
+    margin: 50px;
+    padding: 50px;
+    border: 10px solid #000;}
+    a img{
+        vertical-align: middle;
+    }
+    a span{
+        display: inline-block;
+        width: 0;
+        height: 100%;
+        overflow: hidden;
+        vertical-align: middle;/*垂直居中*/
+    }
+    </style>
+</head>
+<body>
+    <div>我是div</div>
+    <p>我是p</p>
+    <h1>我是h1</h1>
+    <a href="#">我是小a
+        <img src="images/img3.jpg" />
+        <span></span>
+    </a>
+    <span>我是小span</span>
+    <i>我是小i</i>
+    <b>我是小b</b>
+</body>
+</html>

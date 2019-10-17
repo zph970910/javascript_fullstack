@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>伪类选择器</title>
+    
+    <style>
+        div{border: 3px solid #000;height: 300px;}
+        div:after{content: "我是输出的内容";}
+        div:before{content: "我是前面的内容";}
+        div:first-letter{color: red;font-size: 30px;}
+        div:first-line{color: red;font-size: 30px;}
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        我是文字<br />
+        我是文字<br />
+        我是文字<br />
+        我是文字<br />
+        我是文字<br />
+    </div>
+</body>
+</html>
