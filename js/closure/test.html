@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul li {
+      list-style: none;
+      font-size: 40px;
+    }
+
+    li:nth-child(n) {
+      background-color: aqua;
+    }
+
+    li:nth-child(2n) {
+      background-color: burlywood;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+    <li>a</li>
+  </ul>
+  <!-- <script>
+    window.onload = function () {
+      var ul = document.querySelector('ul');
+      var li = ul.querySelectorAll('li');
+      console.log(li.length)
+      for (let i = 0; i < li.length; i++) {
+        li[i].addEventListener("click",()=>{
+          alert(i)
+        })
+      }
+    }
+
+  </script> -->
+
+  <script>
+   function test(){
+      var li = document.getElementsByTagName('li')
+      console.log(li.length)
+      for (var i = 0; i < li.length; i++) {
+        (function (j) {
+          li[j].addEventListener("click", ()=>{
+            console.log(j)
+          })
+        })(i)
+      }
+    }
+    test()
+  </script>
+</body>
+
+</html>
