@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //n!
+    // function mul(n){
+    //   var num=1
+    //   for(let i=1;i<=n;i++){
+    //     num=num*i 
+    //   }
+    //   return num
+    // }
+    // console.log(mul(5))
+
+    function mul(n){
+      if(n==1 || n==0){
+        return 1
+      }
+      return n*mul(n-1)
+       
+    }
+    mul(5)
+    console.log(mul(5))
+
+    //递归一定能找到一个合适的数学公式
+  </script>
+
+  <script>
+    //斐波那契数列
+    // fb(n)=fb(n-1)+fb(n-2)
+
+    function fb(n){
+      if(n==2 || n==1){
+        return 1
+      }
+      return fb(n-1)+fb(n-2)
+    }
+    //fb(n)
+    console.log(fb(10))
+
+    // fb(4)
+    // fb(4)=fb(3)+fb(2)
+    // fb(3)=fb(2)+fb(1)
+    // fb(0)=0
+
+
+  </script>
+</body>
+</html>
