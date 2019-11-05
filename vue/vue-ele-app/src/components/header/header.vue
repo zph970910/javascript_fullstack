@@ -220,6 +220,7 @@ export default {
     overflow auto
     background rgba(7, 17, 27, 0.8)
     backdrop-filter blur(10px)
+    z-index 10
     &.fade-enter, 
     &.fade-leave-active
       opacity 0
