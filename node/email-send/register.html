@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/register1"
+  name="registerform"
+  method="POST" enctype="text/plain">
+    <input type="email" name="emial" placeholder="输入你的邮箱">
+    <input type="text" name ="code" placeholder="输入验证码">
+    <span id="sendEmail">发送验证码</span>
+    <input type="submit" value="提交" />
+  </form>
+</body>
+<script>
+const sendEmail = document.getElementById('sendEmail');
+sendEmail.addEventListener('click', () => {
+  const email = document.forms['registerform']['emial'].value
+  //get 的 请求方式提交 email
+  fetch('/sendEmail' + '?email=' + email)
+  .then(res => res.json())
+  .then(data => {
+    console.log('data', data);
+  })
+})
+</script>
+</html>
