@@ -8,7 +8,7 @@
           :key="index"
           class="menu-item"
           @click="selectMenu(index)"
-          :class="{'current': currentIndex ===index }"
+          :class="{'current' : currentIndex === index}"
           >
             <span class="text border-1px">
               <span v-if="item.type > 0" class="icon" :class="classMap[item.type]"></span>
@@ -19,10 +19,19 @@
       </div>
       <div class="foods-wrapper" ref="foodsWrapper">
         <ul>
-          <li class="food-list" v-for="(item, index) in goods" :key="index" ref="foodList">
+          <li 
+          class="food-list" 
+          v-for="(item, index) in goods"
+          :key="index"
+          ref="foodList"
+          >
             <h1 class="title">{{item.name}}</h1>
             <ul>
-              <li class="food-item border-1px" v-for="(food, index) in item.foods" :key="index">
+              <li 
+              class="food-item border-1px"
+              v-for="(food, index) in item.foods"
+              :key="index"
+              >
                 <div class="icon">
                   <img :src="food.icon" alt="">
                 </div>
@@ -34,8 +43,12 @@
                     <span>好评率{{food.rating}}%</span>
                   </div>
                   <div class="price">
-                    <span class="now">￥{{food.price}}</span>
-                    <span class="old" v-if="food.oldPrice">￥{{food.oldPrice}}</span>
+                    <span class="now">¥{{food.price}}</span>
+                    <span class="old" v-if="food.oldPrice">¥{{food.oldPrice}}</span>
+                  </div>
+                  <div class="cartcontrol-wrapper">
+                    <!-- + -->
+                    <cartcontrol :food="food" @add="addFood"></cartcontrol>
                   </div>
                 </div>
               </li>
@@ -44,49 +57,74 @@
         </ul>
       </div>
     </div>
-    <shopcart></shopcart>
+    <!-- 购物车 -->
+    <shopcart
+      :selectFoods = "selectFoods"
+      :deliveryPrice = "seller.deliveryPrice"
+      :minPrice = "seller.minPrice"
+    ></shopcart>
   </div>
 </template>
 
 <script>
 import BScroll from 'better-scroll'
 import shopcart from '@/components/shopcart/shopcart'
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
 export default {
   name: 'Goods',
+  props: {
+    seller: {
+      type: Object
+    }
+  },
   data () {
     return {
-      goods: [1,2,3,4,5,6,7,8,9],
-      classMap: ['decrease','discount','special','invoice','guarantee'],
+      goods: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+      classMap: ['decrease', 'discount', 'special', 'invoice', 'guarantee'],
       listHeight: [],
       scrollY: 0
     }
   },
   components: {
-    shopcart
+    shopcart,
+    cartcontrol
   },
   created () {
     this.$http.get('http://localhost:8080/static/data/goods.json')
-    .then((res) => {
-      console.log(res)
-      if (res.data.errno === 0) {
-         this.goods = res.data.data
-         this.$nextTick(() => {
-           this._initScroll()
-            this. _calculateHeight()
-         })
-      }
-    })
+      .then((res) => {
+        console.log(res)
+        if (res.data.errno == 0) {
+          this.goods = res.data.data
+          this.$nextTick(() => {
+            this._initScroll()
+            this._calculateHeight()
+          })
+        }
+      })
   },
   computed: {
     currentIndex() {
-      for (let i = 0; i < this.listHeight.lenght; i++) {
+      for (let i = 0; i < this.listHeight.length; i++) {
         let height1 = this.listHeight[i]
-        let height2 = this.listHeight[i+1]
-        if (height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
+        let height2 = this.listHeight[i + 1]
+        if (!height2 || (this.scrollY >= height1 && this.scrollY < height2)) {
           return i
         }
       }
       return 0
+    },
+    selectFoods () {
+      let foods = [];
+      for (let good of this.goods) {
+        if (good.foods) {
+          for (let food of good.foods) {
+            if (food.count) {
+              foods.push(food)
+            }
+          }
+        }
+      }
+      return foods
     }
   },
   methods: {
@@ -98,28 +136,30 @@ export default {
         click: true,
         probeType: 3
       })
-      this.foodsScroll.on("scroll",pos => {
-        console.log(pos)
+      this.foodsScroll.on("scroll", pos => {
+        // console.log(pos)
         this.scrollY = Math.abs(Math.round(pos.y))
       })
     },
     selectMenu (idx) {
       console.log(idx)
       // this.currentIndex = idx
-      let fooList = this.$refs.foodList
-      let el = fooList[idx]
-      this.foodsScroll.scrollToElement(el,300)
+      let foodList = this.$refs.foodList
+      let el = foodList[idx]
+      this.foodsScroll.scrollToElement(el, 300)
     },
-    _calculateHeight() {
+    _calculateHeight () {
       let foodList = this.$refs.foodList
       let height = 0
       this.listHeight.push(height)
-      for (let i = 0; i < foodList.lenght; i++) {
+      for (let i = 0; i < foodList.length; i++) {
         let item = foodList[i]
         height += item.clientHeight
         this.listHeight.push(height)
       }
-      console.log(this.listHeight)
+    },
+    addFood () {
+
     }
   }
 }
@@ -135,47 +175,47 @@ export default {
   width 100%
   overflow hidden
   .menu-wrapper
-   flex 0 0 80px
-   width 80px
-   background #f3f5f7
-   .menu-item
-    display table
-    width 56px
-    height 54px
-    padding 0 12px
-    line-height 14px
-    &.current
-      position relative
-      z-index 10
-      margin-top -1px
-      background #fff
-      font-weight 700
-      .text
-       border-none()
-    .icon 
-      display inline-block
-      vertical-align top
-      width 12px
-      height 12px
-      margin-right 2px
-      background-size 12px 12px
-      background-repeat no-repeat
-      &.decrease 
-        bg-image('decrease_3')
-      &.discount 
-        bg-image('discount_3')
-      &.guarantee 
-        bg-image('guarantee_3')
-      &.invoice 
-        bg-image('invoice_3')
-      &.special 
-        bg-image('special_3')
-    .text 
-      display table-cell
+    flex 0 0 80px
+    width 80px
+    background #f3f5f7
+    .menu-item
+      display table
       width 56px
-      vertical-align middle
-      border-1px(rgba(7, 17, 27, 0.1))
-      font-size 12px
+      height 54px
+      padding 0 12px
+      line-height 14px
+      &.current
+        position relative
+        z-index 10
+        margin-top -1px
+        background #fff
+        font-weight 700
+        .text
+          border-none()
+      .icon 
+        display inline-block
+        vertical-align top
+        width 12px
+        height 12px
+        margin-right 2px
+        background-size 12px 12px
+        background-repeat no-repeat
+        &.decrease
+          bg-image('decrease_3')
+        &.discount
+          bg-image('discount_3')
+        &.guarantee
+          bg-image('guarantee_3')
+        &.invoice
+          bg-image('invoice_3')
+        &.special
+          bg-image('special_3')
+      .text 
+        display table-cell
+        width 56px
+        vertical-align middle
+        border-1px(rgba(7, 17, 27, 0.1))
+        font-size 12px
   .foods-wrapper 
     flex 1
     // overflow scroll
@@ -198,7 +238,7 @@ export default {
       .icon 
         flex 0 0 57px
         margin-right 10px
-        img 
+        img
           width 100%
       .content 
         flex 1
@@ -233,5 +273,4 @@ export default {
           position absolute
           right 0
           bottom 12px
-
 </style>
