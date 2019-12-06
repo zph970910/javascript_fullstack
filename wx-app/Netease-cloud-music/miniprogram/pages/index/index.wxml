@@ -1,0 +1,200 @@
+<view class="main">
+  <!-- 头部搜索栏 -->
+  <view class="header"> 
+    <image class="header-icon" src="../../images/listening.png" />
+    <input placeholder="{{searchValue}}" bindtap="goSearch">
+      <image src="../../images/searchBar.png"/>
+    </input>
+    <image class="header-icon" src="../../images/player.png"  />
+  </view>
+  <!-- 头部搜索栏结束 -->
+  <scroll-view scroll-y="true" enable-back-to-top="true" scroll-with-animation="true" style="height:{{scrollHeight}}px" >
+    <!-- 海报轮播图 -->
+    <swiper indicator-dots="true" indicator-color="#fff" indicator-active-color="red" autoplay="true" circular="true" interval="4000" circular="true" duration="500">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item >
+          <image class="slide-image" src="{{item}}" width="100%" />        
+        </swiper-item>   
+      </block>
+    </swiper>
+    <!-- 海报轮播图结束 -->
+
+    <!-- 功能栏 -->
+    <view class="container">
+      <view class="suggest container-aa">
+        <image src="../../images/suggest.png"  />
+        <span>每日推荐</span>  
+      </view>
+      <view class="songs container-aa">
+        <image src="../../images/songs.png"  />
+        <span>歌单</span>
+      </view>
+      <view class="ranking container-aa">
+        <image src="../../images/ranking.png"  />
+        <span>排行榜</span>
+      </view>
+      <view class="radio container-aa">
+        <image src="../../images/radio.png"  />
+        <span>电台</span>
+      </view>
+      <view class="live container-aa">
+        <image src="../../images/live.png"  />
+        <span>直播</span>
+      </view>
+    </view>
+    <!-- 功能栏结束 -->
+    <view class="line"></view>
+    <!-- 推荐歌单 -->
+    <view class="suggestSongs">
+      <view class="suggestSongs-header">
+        <view class="suggestSongs-left">推荐歌单</view>
+        <view class="suggestSongs-right">歌单广场</view>
+      </view>
+      <view class="suggestSongs-list">
+        <view class="suggestSongs-content" wx:for="{{suggestSongs}}">
+          <view class="suggestSongs-content-image">
+            <image class="" src="{{item.img}}"  />
+          </view> 
+          <view class="suggestSongs-content-text">{{item.text}}</view>
+          <view class="suggestSongs-content-count">
+            <image class="" src="../../images/play.png" />
+            {{item.count}} 万
+            </view>         
+        </view>
+      </view>
+    </view>
+    <!-- 推荐歌单结束 -->
+
+    <!-- 新碟新歌 -->
+    <view class="newMusic">
+      <view class="newMusic-header">
+        <view class="newMusic-header-left">
+          <view class="newMusic-disc {{currentTab===0 ? 'on' : ''}}" data-current="0" bindtap="switchMusic">新碟</view>
+          <view class="newMusic-line">|</view>
+          <view class="newMusic-song {{currentTab===1 ? 'on' : ''}}" data-current="1" bindtap="switchMusic">新歌</view>
+        </view>
+        <view class="newMusic-header-right" wx:if="{{currentTab==0}}">更多新碟</view>
+        <view class="newMusic-header-right" wx:else>更多新歌</view>
+      </view>
+      <swiper class="newMusic-lists" current="{{currentTab}}" bindchange="bindChange" style="width:100%">
+        <swiper-item class="newMusic-list-content" item-id="0">   
+          <view class="newMusic-list" wx:for="{{newDisc}}" wx:key="{{index}}">
+            <image class="newMusic-list-img" src="{{item.img}}" />
+            <view class="newMusic-list-text">{{item.text}}</view>
+            <view class="newMusic-list-name">{{item.name}}</view>
+          </view>
+        </swiper-item>
+        <swiper-item class="newMusic-list-content" item-id="1">
+          <view class="newMusic-list" wx:for="{{newSong}}" wx:key="{{index}}">
+            <image class="newMusic-list-img" src="{{item.img}}" />
+            <view class="newMusic-list-text">{{item.text}}</view>
+            <view class="newMusic-list-name">{{item.name}}</view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view>
+    <!-- 新碟新歌结束 -->
+    <view class="bgWapper"></view>
+    <!-- 云村精选 -->
+    <view class="cloudSelection-header">
+      <view class="cloudSelection-header-left">云村精选</view>
+      <view class="cloudSelection-header-right">
+        <image class="" src="../../images/huoqu.png" />
+        <span>获取新内容</span>
+      </view>
+    </view>
+    <view class="line"></view>
+    <view class="cloudSelection">
+      <view class="cloudSelection-content" >
+        <image class="cloudSelection-image" src="http://img4.imgtn.bdimg.com/it/u=3644359902,3191619950&fm=26&gp=0.jpg" />
+        <image class="videoplay-icon" src="../../images/videoplay.png" /> 
+        <view class="cloudSelection-text">
+          <span>【国家队/Ditf/02/催泪AMV】你爱的人永远在等着你</span>
+          <image class="" src="http://img3.imgtn.bdimg.com/it/u=2282939143,639451214&fm=26&gp=0.jpg" /> 
+        </view>   
+      </view>
+      <view class="container-play">
+        <view class="container-play-left">
+          <image class="play-icon" src="../../images/play.png" />
+          <span> 12万</span>
+        </view>
+        <view class="container-play-right">
+          <image class="play-icon" src="../../images/videoPlaying.png" />
+          <span>04:12</span>
+        </view>
+      </view> 
+      <view class="cloudSelection-content-commentaries">
+        <view class="cloudSelection-commentaries-left">
+          <image class="" src="../../images/dianzan.png" />
+          <span>3561</span>     
+        </view>
+        <view class="cloudSelection-commentaries-center">
+          <image class="" src="../../images/pinglun.png" />
+          <span>569</span> 
+        </view>
+        <view class="cloudSelection-commentaries-right">
+          <image class="" src="../../images/more.png" />      
+        </view>
+      </view> 
+      <view class="bgWapper1"></view>  
+    </view>
+    <!-- 云村结束 -->
+
+    <!-- 听听 -->
+    <view class="listening-wrapper">
+      <view class="listening-header">
+        <view class="listening-header-left">
+          <span>听听 ></span>
+        </view>
+        <view class="listening-header-right">
+          <image class="" src="../../images/more.png"  />    
+        </view>
+      </view>
+      <view class="listening-list-wrapper">
+        <view class="listening-list" wx:for="{{listening}}" wx:key="{{index}}">
+          <image class="" src="{{item.img}}"  />
+          <view class="listening-text">{{item.text}}</view> 
+        </view>
+      </view>
+    </view>
+    <!-- 听听结束 -->
+    <view class="bgWapper"></view>
+    <!-- 云村视频 -->
+    <view class="cloudSelection" wx:for="{{cloudSelection}}">
+      <view class="cloudSelection-content" >
+        <image class="cloudSelection-image" src="{{item.img}}" />
+        <image class="videoplay-icon" src="../../images/videoplay.png" /> 
+        <view class="cloudSelection-text">
+          <span>{{item.text}}</span>
+          <image class="" src="{{item.headImage}}" /> 
+        </view>   
+      </view>
+      <view class="container-play">
+        <view class="container-play-left">
+          <image class="play-icon" src="../../images/play.png" />
+          <span> {{item.fbCount}}</span>
+        </view>
+        <view class="container-play-right">
+          <image class="play-icon" src="../../images/videoPlaying.png" />
+          <span>{{item.playtime}}</span>
+        </view>
+      </view> 
+      <view class="cloudSelection-content-commentaries">
+        <view class="cloudSelection-commentaries-left">
+          <image class="" src="../../images/dianzan.png" />
+          <span>{{item.dzCount}}</span>     
+        </view>
+        <view class="cloudSelection-commentaries-center">
+          <image class="" src="../../images/pinglun.png" />
+          <span>{{item.plCount}}</span> 
+        </view>
+        <view class="cloudSelection-commentaries-right">
+          <image class="" src="../../images/more.png" />      
+        </view>
+      </view> 
+      <view class="bgWapper1"></view>  
+    </view>
+    <!-- 云村视频结束 -->
+    <view class="main-bottom">厉害，你刷到了底线</view>
+  </scroll-view>
+</view>

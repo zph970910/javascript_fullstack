@@ -1,0 +1,138 @@
+<view class="main">
+  <!-- 头部搜索栏 -->
+  <meta name="referrer" content="never">
+  <view class="header"> 
+    <image class="header-icon" src="../../images/video-icon.png" />
+    <input placeholder="{{searchValue}}" bindtap="goSearch">
+      <image src="../../images/searchBar.png"/>
+    </input>
+    <image class="header-icon" src="../../images/player.png"  />
+  </view>
+  <!-- 头部搜索栏结束 -->
+
+  <scroll-view class="videoHeader" scroll-x="true">
+    <view class="video-header">
+      <view class="container {{currentTab===0 ? 'on' : ''}}" data-current="0" bindtap="switchHead">推荐</view>
+      <view class="container {{currentTab===1 ? 'on' : ''}}" data-current="1" bindtap="switchHead">LOOK直播</view>
+      <view class="container {{currentTab===2 ? 'on' : ''}}" data-current="2" bindtap="switchHead">追光者</view>
+      <view class="container {{currentTab===3 ? 'on' : ''}}" data-current="3" bindtap="switchHead">听BGM</view>
+      <view class="container {{currentTab===4 ? 'on' : ''}}" data-current="4" bindtap="switchHead">现场</view>
+      <view class="container {{currentTab===5 ? 'on' : ''}}" data-current="5" bindtap="switchHead">翻唱</view>
+      <view class="container {{currentTab===6 ? 'on' : ''}}" data-current="6" bindtap="switchHead">广场</view>
+      <view class="container {{currentTab===7 ? 'on' : ''}}" data-current="7" bindtap="switchHead">MV</view>
+      <view class="container {{currentTab===8 ? 'on' : ''}}" data-current="8" bindtap="switchHead">舞蹈</view>
+      <view class="container {{currentTab===9 ? 'on' : ''}}" data-current="9" bindtap="switchHead">ACG音乐</view>
+      <view class="container {{currentTab===10 ? 'on' : ''}}" data-current="10" bindtap="switchHead">游戏</view>
+    </view>
+  </scroll-view>
+  <view class="line"></view>
+  <scroll-view scroll-y="{{true}}" style="height:{{scrollHeight}}px" >  
+    <swiper current="{{currentTab}}" bindchange="bindChange" style="width:100%" >
+      <!-- 推荐 -->
+      <swiper-item class="swiper-item" item-id="0">
+      <view class="suggest" wx:for="{{cloudSelection}}">
+        <view class="suggest-content" >
+          <image class="suggest-image" lazy-load="{{true}}" src="{{item.img}}"  />
+          <image class="videoplay-icon" src="../../images/videoplay.png" /> 
+          <view class="suggest-text">
+            <span>{{item.text}}</span> 
+          </view>   
+        </view>
+        <view class="container-play">
+          <view class="container-play-left">
+            <image class="play-icon" src="../../images/play.png" />
+            <span> {{item.fbCount}}</span>
+          </view>
+          <view class="container-play-right">
+            <image class="play-icon" src="../../images/videoPlaying.png" />
+            <span>{{item.playtime}}</span>
+          </view>
+        </view> 
+        <view class="line2"></view>
+        <view class="suggest-commentaries">
+          <view class="suggest-commentaries-left">
+            <image class="headImage" src="{{item.headImage}}" />
+            <span>{{item.netname}}</span>
+          </view>
+          <view class="suggest-commentaries-right">
+            <image class="dz-icon" src="../../images/dianzan.png" />
+            <span>{{item.dzCount}}</span>   
+            <image class="pl-icon" src="../../images/pinglun.png" />
+            <span>{{item.plCount}}</span> 
+            <image class="more-icon" src="../../images/more.png" /> 
+          </view>
+        </view> 
+        <view class="bgWapper1"></view>   
+      </view>
+      </swiper-item>
+      <!-- 推荐结束 -->
+      <!-- LOOK直播 -->
+      <swiper-item item-id="2">
+        <view class="liveplay-header">
+          <view class="liveplay-header-left">
+            <view class="title">明星榜</view>
+            <view class="liveplay-header-image">
+              <image src="http://p2.music.126.net/lRE0QHTUkA_DxlB14uzSqg==/109951164207703933.jpg?param=140y140" />
+              <image src="http://p2.music.126.net/nS8BqYnV5bKtVfiiOhx7JA==/109951164346773446.jpg?param=140y140" />
+              <image src="http://p2.music.126.net/NQW1OLXZxDT710zYZvKqaA==/109951164347024865.jpg?param=140y140" />
+            </view>
+          </view>
+          <view class="liveplay-header-right">
+            <view class="title">我的关注</view>
+            <view class="text">暂无关注主播开播</view>
+          </view>
+        </view>
+        <scroll-view scroll-x="{{true}}" class="videoMiddle">
+          <view class="video-middle">
+            <view class="container2 {{currentTab2===0 ? 'on' : ''}}" data-current="0" bindtap="switchMiddle">热门</view>
+            <view class="container2 {{currentTab2===1 ? 'on' : ''}}" data-current="1" bindtap="switchMiddle">颜值</view>
+            <view class="container2 {{currentTab2===2 ? 'on' : ''}}" data-current="2" bindtap="switchMiddle">才艺</view>
+            <view class="container2 {{currentTab2===3 ? 'on' : ''}}" data-current="3" bindtap="switchMiddle">好声音</view>
+            <view class="container2 {{currentTab2===4 ? 'on' : ''}}" data-current="4" bindtap="switchMiddle">情感</view>
+            <view class="container2 {{currentTab2===5 ? 'on' : ''}}" data-current="5" bindtap="switchMiddle">二次元</view>
+            <view class="container2 {{currentTab2===6 ? 'on' : ''}}" data-current="7" bindtap="switchMiddle">附近</view>
+            <view class="container2 {{currentTab2===7 ? 'on' : ''}}" data-current="8" bindtap="switchMiddle">萌新</view>
+          </view>
+        </scroll-view>
+        <swiper class="hot" current="{{currentTab2}}" bindchange="bindChange2" >
+          <swiper-item class="" item-id="0">
+            <view class="hot-container">
+              <view class="hot-content" wx:for="{{hotContent}}" wx:key="{{index}}">
+                <view class="hot-image">
+                  <image class="" src="{{item.img}}" />
+                </view>
+                <view class="hot-center">
+                  <view class="hot-center-left">{{item.type}}</view>
+                  <view class="hot-center-right">{{item.heat}}</view>
+                </view>
+                <view class="hot-text">
+                  <h1>{{item.text}}</h1>
+                  <span>{{item.name}}</span>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+          <swiper-item class="" item-id="0">
+            <view class="hot-container">
+              <view class="hot-content" wx:for="{{hotContent}}" wx:key="{{index}}">
+                <view class="hot-image">
+                  <image class="" src="{{item.img}}" />
+                </view>
+                <view class="hot-center">
+                  <view class="hot-center-left">{{item.type}}</view>
+                  <view class="hot-center-right">{{item.heat}}</view>
+                </view>
+                <view class="hot-text">
+                  <h1>{{item.text}}</h1>
+                  <span>{{item.name}}</span>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+          
+      </swiper-item>
+    </swiper>
+  </scroll-view>
+  </meta>
+</view>

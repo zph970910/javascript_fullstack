@@ -1,0 +1,134 @@
+/* miniprogram/pages/search/search.wxss */
+.header {
+  height: 70rpx;
+  display: flex;
+  flex-direction: row;
+  margin: 20rpx;
+  align-items: center;
+  justify-content: center;
+}
+input {
+  height: 70rpx;
+  background-color: rgba(0, 0, 0, 0.05);
+  border-radius: 50px;
+  font-size: 32rpx;
+  text-align: left;
+  padding: 0 60rpx;
+  position: relative;
+  flex: 5;
+  position: relative;
+}
+.header-backhome {
+  font-size: 40rpx;
+  font-weight: 500;
+  margin-left: 20rpx;
+  flex: 1;
+}
+.header-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 20rpx;
+}
+input image {
+  position: absolute;
+  top: 10rpx;
+  left: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+}
+.pastSearch-header {
+  margin-top: 30rpx;
+  height: 60rpx;
+}
+.pastSearch-header-text {
+  float: left;
+  color: black;
+  font-weight: 600;
+  font-size: 34rpx;
+  margin-left: 20rpx;
+}
+.pastSearch-delete-icon {
+  float: right;
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+}
+.pastSearch-list {
+  width: 100%;
+  height: 100rpx;
+  white-space: nowrap;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+}
+.pastSearchList {
+  display: inline-block;
+  vertical-align: middle;
+  background: rgba(0, 0, 0, 0.05);
+  margin-right: 20rpx;
+  font-size: 30rpx;
+  font-weight: 400;
+  border-radius: 30rpx;
+  padding: 10rpx 30rpx;
+}
+.hostSearch-header {
+  width: 100%;
+  margin-top: 20rpx;
+  display: inline-flex;
+}
+.hotSearch-list-header {
+  color: black;
+  font-weight: 1000;
+  font-size: 32rpx;
+  margin-left: 20rpx;
+}
+.split-line {
+  font-size: 32rpx;
+  font-weight: 200;
+  margin-left: 15rpx;
+}
+.hotSearch-suggest {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 1000;
+  font-size: 32rpx;
+  margin-left: 15rpx;
+}
+.hotSearch-eachlist {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-top: 20rpx;
+}
+.hotSearch-id1 {
+  font-weight: 500;
+  color: red;
+  margin: 20rpx;
+  flex: 1;
+}
+.hotSearch-id2 {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 20rpx;
+  flex: 1;
+}
+.hotSearch-center {
+  margin: 0 10rpx;
+  flex: 15;
+}
+.hotSearch-name1 {
+  font-size: 34rpx;
+  font-weight: 1000;
+}
+.hotSearch-name2 {
+  font-size: 34rpx;
+  font-weight: 500;
+}
+.hotSearch-tip {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 30rpx;
+}
+.hotSearch-count {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 24rpx;
+  flex: 4;
+}

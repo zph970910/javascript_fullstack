@@ -1,0 +1,49 @@
+<!--miniprogram/pages/search/search.wxml-->
+<view class="main">
+  <!-- 头部搜索栏 -->
+  <view class="header">
+    <input type="text" placeholder="{{searchValue}}" bindtap="getFocus"  bindconfirm="addSearch">
+      <image src="../../images/searchBar.png"  />        
+    </input>    
+    <view class="header-backhome" bindtap="backHome">取消</view>
+    <image class="header-icon" src="../../images/singer.png" />
+  </view>
+  <!-- 头部搜索栏结束 -->
+  <scroll-view class="list-scroll" scroll-y="true" style="height:{{scrollHeight}}px">
+    <!-- 历史记录 -->
+    <view class="pastSearch" wx:if="{{isPastShow}}">
+      <view class="pastSearch-header">
+        <view class="pastSearch-header-text">搜索历史</view>
+        <image class="pastSearch-delete-icon" src="../../images/delete.png"  bindtap='clearPast'/>
+      </view>
+      <scroll-view scroll-x="{{true}}" class="pastSearch-list">
+        <view class="pastSearchList" wx:for="{{pastSearch}}">{{item}}</view>
+      </scroll-view>
+    </view>
+    <!-- 历史记录结束 -->
+    <view>
+      <modal title="确认清除全部历史记录吗？" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel"></modal>
+    </view>
+    <!-- 热搜榜 -->
+    <view class="hotSearch" bindtap="addSearch2">
+      <view class="hostSearch-header">
+        <view class="hotSearch-list-header">热搜榜</view>
+        <view class="split-line">|</view>
+        <view class="hotSearch-suggest">推荐</view>
+      </view>
+      <view class="hotSearch-list" wx:for="{{hotSearch}}">
+        <view class="hotSearch-eachlist">
+          <view class="hotSearch-id1" wx:if="{{item.id<4}}">{{item.id}}</view>
+          <view class="hotSearch-id2" wx:else>{{item.id}}</view>
+          <view class="hotSearch-center">
+            <view class="hotSearch-name1" wx:if="{{item.id<4}}">{{item.name}}</view>
+            <view class="hotSearch-name2" wx:else>{{item.name}}</view>
+            <view class="hotSearch-tip">{{item.tip}}</view>
+          </view>
+          <view class="hotSearch-count">{{item.count}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 热搜榜结束 -->
+  </scroll-view>
+</view>
