@@ -5,6 +5,7 @@ import A from '@/components/pages/A'
 import Parent from '@/components/views/parent'
 import Form from '@/components/form/form'
 import Show from '@/components/form/show'
+import Display from '@/components/Display'
 
 Vue.use(Router)
 
@@ -12,8 +13,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Show',
-      component: Show
+      name: 'Display',
+      component: Display
     }
   ]
 })
