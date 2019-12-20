@@ -81,14 +81,14 @@ export default {
       showDetail: false
     }
   },
- methods: {
-   detailShow () {
-     this.showDetail = true
-   },
-   hideDetail () {
-     this.showDetail = false
-   }
- }
+  methods: {
+    detailShow () {
+      this.showDetail = true
+    },
+    hideDetail () {
+      this.showDetail = false
+    }
+  }
 }
 </script>
 
@@ -107,7 +107,6 @@ export default {
       vertical-align top
       img
         border-radius 2px
-
     .content
       display inline-block
       font-size 14px
