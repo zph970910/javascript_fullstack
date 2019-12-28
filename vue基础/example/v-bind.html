@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>v-bind</title>
+</head>
+<body>
+  <h1>v-bind 实例</h1>
+  <hr>
+  <div id="app">
+    <p><img :src="imgUrl" width="200px" height="300px"/></p>
+    <p><a :href="webUrl">淘宝网</a></p>
+    <hr>
+    <div :class="className">1.绑定class</div>
+    <div :class="{classB: isTrue}">1.绑定class判断</div>
+    <div :class="[classA, classB]">2.绑定class数组</div>
+    <div :class="isTrue ? classA : classB">3.绑定class数组</div>
+    <hr>
+    <div>
+      <input type="checkbox" id="isTrue" v-model="isTrue" />
+      <label for="isTrue">isTrue={{isTrue}}</label>
+    </div>
+    <div :style="{color:red,fontSize:font}">4.style绑定</div>
+    <div :style="styleObj">5.style绑定对象</div>
+  </div>
+  <style>
+    .classA {
+      color: red;
+    }
+    .classB {
+      font-size: 20px;
+    }
+  </style>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        imgUrl: 'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1188387633,958216909&fm=26&gp=0.jpg',
+        webUrl: 'https://www.taobao.com',
+        className: 'classA',
+        isTrue: false,
+        classA: 'classA',
+        classB: 'classB',
+        red: 'blue',
+        font: '22px',
+        styleObj: {
+          color: 'pink',
+          fontSize: '30px'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

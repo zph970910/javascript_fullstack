@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1>v-for</h1>
+  <hr>
+  <div id="app">
+    <ul>
+      <li v-for="item in sortItem">{{item}}</li>
+    </ul>
+    <ul>
+      <li v-for="(item, index) in sortStudent">
+        {{index+1}}:{{item.name}}-{{item.age}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        items: [23,43,13,67,34,87,21],
+        students: [
+          {name: 'zph',age: '18'},
+          {name: 'zzz',age: '20'},
+          {name: 'ppp',age: '16'},
+          {name: 'hhh',age: '22'}
+        ]
+      },
+      computed: {
+        sortItem: function() {
+          console.log(this)
+          return this.items.sort()
+        },
+        sortStudent: function() {
+          return sortObj(this.students, 'age')
+        }
+      } 
+    });
+    function sortObj(obj, key) {
+      return obj.sort(function(a,b){
+        x = a[key]
+        y = b[key]
+        return ((x>y) ? 1 : ((x<y) ? -1 : 0))
+      })
+    }
+  </script>
+</body>
+</html>

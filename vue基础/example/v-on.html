@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>v-on</title>
+</head>
+<body>
+  <h1>v-on 实例</h1>
+  <hr>
+  <div id="app">
+    本场比赛得分：{{sroce}}
+    <p>
+      <button v-on:click="addSroce">加分</button>
+      <button @click="reduceSroce">减分</button>
+      <input type="text" v-on:keyup.enter="onEnter" v-model="sroce2">
+    </p>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        sroce: 0,
+        sroce2: 1
+      },
+      methods: {
+        addSroce: function() {
+          this.sroce ++
+        },
+        reduceSroce: function() {
+          this.sroce --
+        },
+        onEnter: function() {
+          this.sroce += parseInt(this.sroce2)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
