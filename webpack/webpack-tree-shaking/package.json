@@ -1,0 +1,20 @@
+{
+  "name": "webpack-tree-shaking",
+  "version": "1.0.0",
+  "description": "拆分文件体积\r 配置很多",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.7",
+    "@babel/core": "^7.7.7",
+    "babel-plugin-import": "^1.13.0"
+  }
+}
