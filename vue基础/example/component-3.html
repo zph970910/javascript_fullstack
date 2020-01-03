@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Component</title>
+</head>
+<body>
+  <h1>Component-3</h1>
+  <hr>
+  <div id="app">
+    <panda></panda>
+  </div>
+  <script>
+    var city = {
+      template: `<h2 style="color: green">taiwan of China!</h2>`
+    }
+    var panda = {
+      template: `
+                 <div>
+                   <h2 style="color: blue">Panda from China!</h2>
+                   <city></city>
+                  </div>
+                 `
+                ,
+      components: {
+        "city": city
+      }
+    }
+    var app = new Vue({
+      el: '#app',
+      components: {
+        "panda": panda
+      }
+    })
+  </script>
+</body>
+</html>

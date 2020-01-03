@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Hello World</title>
+</head>
+<body>
+  <h1>HelloWorld</h1>
+  <hr>
+  <div id="app">
+    {{a}}
+    <p><button @click="add(5)">ADD</button></p>
+    <p><btn @click.native="add(10)"></btn></p>
+  </div>
+  <p><button onclick="app.add(100)">外部ADD</button></p>
+  <script>
+    var btn = Vue.extend({
+      template: `<button>组件ADD</button>`
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        a: 1
+      },
+      components: {
+        "btn": btn
+      },
+      methods: {
+        add (nums) {
+          this.a += nums
+        }
+      }
+    })
+  </script>
+</body>
+</html>

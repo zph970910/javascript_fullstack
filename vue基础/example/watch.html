@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>watch options</title>
+</head>
+<body>
+  <h1>watch options</h1>
+  <hr>
+  <div id="app">
+    <p>温度：{{wendu}}°</p>
+    <p>建议穿衣：{{chuanyi}}</p>
+    <p><button @click="add">升高温度</button> <button @click="reduce">降低温度</button></p>
+  </div>
+  <script>
+    var array = ['棉袄', '连衣裙', '短袖T恤']
+    var app = new Vue({
+      el: '#app',
+      data: {
+        wendu: 13,
+        chuanyi: '连衣裙'
+      },
+      methods: {
+        add() {
+          this.wendu += 5
+        },
+        reduce() {
+          this.wendu -= 5
+        }
+      },
+      // watch: {
+      //   wendu(newval, oldval) {
+      //     if (newval > 26) {
+      //       this.chuanyi = array[2]
+      //     } else if (newval > 0 && newval < 26) {
+      //       this.chuanyi = array[1]
+      //     } else {
+      //       this.chuanyi = array[0]
+      //     }
+      //   }
+      // }
+    })
+
+    app.$watch('wendu', function (newval, oldval) {
+      if (newval > 26) {
+        this.chuanyi = array[2]
+      } else if (newval > 0 && newval < 26) {
+        this.chuanyi = array[1]
+      } else {
+        this.chuanyi = array[0]
+      }
+    })
+  </script>
+</body>
+</html>

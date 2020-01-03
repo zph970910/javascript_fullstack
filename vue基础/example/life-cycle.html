@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>生命周期</title>
+</head>
+<body>
+  <h1>生命周期</h1>
+  <hr>
+  <div id="app">
+    {{count}}
+    <p>
+      <button @click="add">add</button>
+    </p>
+  </div>
+  <p><button onclick="app.$destroy()">销毁</button></p>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 1
+      },
+      beforeCreate() {
+        console.log('1~~~初始化之前')
+      },
+      created() {
+        console.log('2~~~创建完成')
+      },
+      beforeMount() {
+        console.log('3~~~挂载前')
+      },
+      mounted() {
+        console.log('4~~~挂载完成')
+      },
+      beforeUpdate() {
+        console.log('5~~~数据更新前')
+      },
+      updated() {
+        console.log('6~~~数据更新后')
+      },
+      beforeDestroy() {
+        console.log('7~~~销毁前')
+      },
+      destroyed() {
+        console.log('8~~~销毁后')
+      },
+      methods: {
+        add() {
+          this.count++
+        }
+      }
+    })
+  </script>
+</body>
+</html>

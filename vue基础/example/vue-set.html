@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1>Vue.set 全局操作</h1>
+  <hr>
+  <div id="app">
+    {{count}}
+    <ul>
+      <li v-for="aa in arr">{{aa}}</li>
+    </ul>
+  </div>
+  <button onclick="add()">外部添加</button>
+
+  <script>
+
+    function add() {
+      // Vue.set(outData, 'count', 5)
+      // app.count++
+      // outData.count++
+      Vue.set(app.arr, 1, 'ddd')
+    }
+    var outData = {
+      count: 1,
+      arr: ['aaa', 'bbb', 'ccc']
+    }
+    var app = new Vue({
+      el: '#app',
+      data: outData
+    })
+  </script>
+</body>
+</html>
