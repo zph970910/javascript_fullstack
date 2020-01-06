@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>extends options</title>
+</head>
+<body>
+  <h1>extends options</h1>
+  <hr>
+  <div id="app">
+    <p >${count}</p>
+    <p><button @click="add">ADD</button></p>
+  </div>
+  <script>
+    var extendObj = {
+      updated () {
+        console.log('我是扩展的updated')
+      },
+      add () {
+        console.log('我是扩展的extends')
+          this.count++
+        }
+    }
+    var app = new Vue({
+      el: '#app',
+      data: {
+        count: 1
+      },
+      updated(){
+        console.log("构造器里的updated方法。")
+      },
+      methods: {
+        add () {
+          console.log('我是原生的方法')
+          this.count++
+        }
+      },
+      extends: extendObj,
+      delimiters: ['${','}']
+     
+    })
+    
+  </script>
+</body>
+</html>

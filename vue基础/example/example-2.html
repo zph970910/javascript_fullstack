@@ -5,21 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <title>HelloWorld</title>
+  <script src="../assets/js/jquery-3.4.1.slim.js"></script>
+  <title>example methods2</title>
 </head>
 <body>
-  <h1>HelloWorld</h1>
+  <h1>example methods2</h1>
   <hr>
   <div id="app">
     {{message}}
   </div>
+  <p>
+    <button onclick="destroy()"></button>
+  </p>
   <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        message: 'hello world!!!!!'
+    var jspang = Vue.extend({
+      template: `<h2>{{message}}</h2>`,
+      data () {
+        return {
+          message: 'Hello, I am Jspang'
+        }
       }
     })
+    var vm = new jspang().$mount('#app')
   </script>
 </body>
 </html>

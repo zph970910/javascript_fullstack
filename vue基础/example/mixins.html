@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>mixins options</title>
+</head>
+<body>
+  <h1>mixins options</h1>
+  <hr>
+  <div id="app">
+    <p >{{count}}</p>
+    <p><button @click="add">ADD</button></p>
+  </div>
+  <script>
+    var mixins = {
+      updated () {
+        console.log('数据发生了变化，变成了' + this.count )
+      }
+    }
+    Vue.mixin({
+      updated () {
+        console.log('我是全局被混入的')
+      }
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'hello world!!!!!',
+        count: 1
+      },
+      updated(){
+        console.log("构造器里的updated方法。")
+      },
+      methods: {
+        add () {
+          this.count++
+        }
+      },
+      mixins: [mixins],
+     
+    })
+    
+  </script>
+</body>
+</html>
