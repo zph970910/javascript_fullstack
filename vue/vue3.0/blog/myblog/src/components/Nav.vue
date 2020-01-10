@@ -1,5 +1,6 @@
 <template>
-  <div class="nav">
+  <div>
+    <div class="nav">
       <div class="nav-content">
         <el-row :gutter="20">
           <el-col :span="3">
@@ -15,13 +16,12 @@
               :router="true"
               @select="handleSelect"
             >
-              <el-menu-item 
-                v-for="item in list" 
+              <el-menu-item
+                v-for="item in list"
                 :key="item.index"
                 :index="item.index"
-                :route="item.path">
-                {{item.name}}
-              </el-menu-item>
+                :route="item.path"
+              >{{item.name}}</el-menu-item>
             </el-menu>
           </el-col>
           <el-col :span="5">
@@ -32,22 +32,21 @@
           </el-col>
         </el-row>
       </div>
-      <RegisterAndLogin></RegisterAndLogin>
     </div>
-
+    <RegisterAndLogin :visible="visible" @cancel="handleCancel" :handleFlag="handleFlag"></RegisterAndLogin>
+  </div>
 </template>
-
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import { NavListItem } from '../types/index'
-import RegisterAndLogin from '@/components/RegisterAndLogin.vue'
+import { Vue, Component } from "vue-property-decorator";
+import { NavListItem } from "../types/index";
+import RegisterAndLogin from "@/components/RegisterAndLogin.vue";
 
 @Component({
   components: {
     RegisterAndLogin
   }
 })
-export default  class Nav extends Vue{
+export default class Nav extends Vue {
   private list: Array<NavListItem> = [
     {
       index: "1",
@@ -84,14 +83,21 @@ export default  class Nav extends Vue{
       path: "/about",
       name: "关于"
     }
-  ]
+  ];
+
+  private visible: boolean = false;
+  private handleFlag: string = "";
 
   private handleClick(value: string): void {
-
+    this.visible = true;
+    this.handleFlag = value;
   }
-  private handleSelect() {
 
+  private handleCancel(value: boolean) {
+    this.visible = value;
   }
+
+  private handleSelect() {}
 }
 </script>
 
