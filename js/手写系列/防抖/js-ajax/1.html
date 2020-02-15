@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="people">
+    <div class="name"></div>
+    <div class="age"></div>
+  </div>
+
+  <!-- <script>
+    $.ajax({
+      url: './mock.json',
+      type: 'get',
+      dataType: 'json',
+      timeout: 5000,
+      success: function(data) {
+        console.log(data.persion)
+        $('.name').html(data.persion.name)     
+        $('.age').html(data.persion.age)     
+      }
+    })
+    console.log(data)
+  </script> -->
+
+  <script>
+    var xhr = null
+    xhr = new XMLHttpRequest()
+
+    xhr.open('get', './mock.json', true)
+    xhr.send()
+    // 状态变化回调
+    // readyState的状态码代表什么呢？这里记录如下：
+    // 0：未初始化，但是已经创建了XHR实例
+    // 1：调用了open()函数
+    // 2：已经调用了send()函数，但还未收到服务器回应
+    // 3：正在接受服务器返回的数据
+    // 4：完成响应
+    xhr.onreadystatechange = function() {
+      // console.log(xhr.readyState, xhr.status)
+      if(xhr.readyState === 4 && xhr.status === 200) {
+        console.log(xhr.responseText)
+        var data = JSON.parse(xhr.responseText)
+        document.querySelector('.name').innerHTML = data.persion.name
+      }
+    }
+  </script>
+</body>
+</html>
