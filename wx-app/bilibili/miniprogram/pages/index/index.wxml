@@ -1,0 +1,83 @@
+<!-- miniprogram/pages/index/index.wxml -->
+<view class="content">
+  <!-- 头部信息 -->
+  <view class="header">
+    <!-- 左边头像 -->
+    <view class="header-left">
+      <image class="" src="" />
+    </view>
+    <!-- 中间搜索栏 -->
+    <view class="header-center" bindtap="goSearch">
+      <view class="header-sousuo_icon">
+        <image src="../../images/sousuo.png" />
+      </view>
+      <view class="header-input"></view>
+    </view>
+    <!-- 右边 -->
+    <view class="header-right">
+      <view class="header-icon game">
+        <image src="../../images/youxi.png" />
+      </view>
+      <view class="header-icon down">
+        <image src="../../images/xiazai.png" />
+      </view>
+      <view class="header-icon massage">
+        <image src="../../images/xiaoxi.png" />
+      </view>
+    </view>
+  </view>
+  <!-- 头部结束 -->
+  <!-- 头部导航栏 -->
+  <view class="header-swiper-tab">
+    <view class="tab-item {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichTab">
+      <view>直播</view>
+    </view>
+    <view class="tab-item {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichTab">
+      <view>推荐</view>
+    </view>
+    <view class="tab-item {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichTab">
+      <view>热门</view>
+    </view>
+    <view class="tab-item {{currentTab==3 ? 'on' : ''}}" data-current="3" bindtap="swichTab">
+      <view>追番</view>
+    </view>
+    <view class="tab-item {{currentTab==4 ? 'on' : ''}}" data-current="4" bindtap="swichTab">
+      <view>影视</view>
+    </view>
+  </view>
+  <!-- 头部导航栏结束 -->
+  <swiper class="" current="{{currentTab}}" style="height:{{scrollHeight}}px"
+  bindchange="changeBar">
+    <swiper-item class="" item-id="0"></swiper-item>
+    <swiper-item class="recommend" item-id="1">
+      <scroll-view class="recommend-scroll" scroll-y="true" style="height:{{scrollHeight}}px">
+        <view class="recommend-scroll-content" wx:for="{{recommend}}">
+          <view class="recommend-scroll-content-top">
+            <image src="{{item.imgURL}}" />
+            <view class="view-counts">
+              <image src="../../images/shiping.png" />
+              <span>{{item.viewCounts}}</span>
+              <image src="../../images/danmu.png" />
+              <span>{{item.danmuCounts}}</span>
+            </view>
+            <span class="right">{{item.time}}</span>
+          </view>
+          <view class="recommend-scroll-content-bottom">
+            <view class="title">{{item.title}}</view>
+            <view class="title-bottom">
+              <view class="title-bottom-left">
+                <span>{{item.type}}</span>
+              </view>
+              <view class="title-bottom-right" bindtap="more">
+                <image src="../../images/gengduo.png" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </swiper-item>
+    <swiper-item class="" item-id="2"></swiper-item>
+    <swiper-item class="" item-id="3"></swiper-item>
+    <swiper-item class="" item-id="4"></swiper-item>
+  </swiper>
+</view>

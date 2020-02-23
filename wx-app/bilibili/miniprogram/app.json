@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/openapi/openapi",
+    "pages/openapi/serverapi/serverapi",
+    "pages/openapi/callback/callback",
+    "pages/openapi/cloudid/cloudid",
+    "pages/im/im",
+    "pages/im/room/room"
+
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "selectedColor": "#f25c81",
+    "borderStyle": "white",
+    "backgroundColor": "#ededed",
+    "list": [
+      {
+        "text": "首页",
+        "iconPath": "./images/icon1.png",
+        "selectedIconPath": "./images/icon2.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "频道",
+        "iconPath": "./images/pindao1.png",
+        "selectedIconPath": "./images/pindao2.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "动态",
+        "iconPath": "./images/iconfontdongtai1.png",
+        "selectedIconPath": "./images/iconfontdongtai2.png",
+        "pagePath": "pages/index/index"
+      },
+      {
+        "text": "会员购",
+        "iconPath": "./images/gouwu1.png",
+        "selectedIconPath": "./images/gouwu2.png",
+        "pagePath": "pages/index/index"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

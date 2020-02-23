@@ -1,0 +1,161 @@
+/* miniprogram/pages/index/index.wxss */
+
+.content {
+  width: 100%;
+  height: 100%;
+}
+.header {
+  width: 100%;
+  height: 140rpx;
+  background-color: #f25c81;
+}
+.header-left {
+  float: left;
+  border-radius: 50%;
+  background-color: #fff;
+  width: 100rpx;
+  height: 100rpx;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+}
+.header-center .header-input {
+  width: 320rpx;
+  float: left;
+  height: 60rpx;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+  padding-left: 50rpx;
+  clear: right
+}
+.header-center .header-sousuo_icon image {
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 50rpx;
+  left: 150rpx;
+}
+.header-right {
+  display: flex;
+}
+.header-right .header-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-left: 30rpx;
+  margin-top: 40rpx;
+}
+.header-right .header-icon image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.header-swiper-tab {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.header-swiper-tab .tab-item {
+  margin-top: 10rpx;
+  flex: 1;
+  height: 30rpx;
+  text-align: center;
+  font-weight: lighter;
+  font-size: 28rpx;
+  /* 如何修改底部边框的长度 */
+  /* 解决方法，再加一个div */
+}
+.header-swiper-tab .on {
+  color: #f25c81;
+  border-bottom: 2px solid #f25c81;
+  padding-bottom: 20rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+.recommend-scroll {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.recommend-scroll-content{
+  width: 45%;
+  height: 300rpx;
+  float: left;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px #dbdbdb;
+}
+.recommend-scroll-content-top{
+  width: 100%;
+  height: 200rpx;
+}
+.recommend-scroll-content-top image{
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.view-counts {
+  position: relative;
+  top: -50rpx;
+  float: left;
+  margin-left: 10rpx;
+}
+.view-counts image {
+  width: 30rpx;
+  height: 30rpx;
+}
+.view-counts span{
+  display: inline-block;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 12px;
+  color: #fff;
+  position: relative;
+  top: -5rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.recommend-scroll-content-top .right {
+  float: right;
+  line-height: 30rpx;
+  font-size: 12px;
+  color: #fff;
+  position: relative;
+  top: -45rpx;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+.recommend-scroll-content-bottom {
+  height: 100rpx;
+  width: 100%;
+}
+.recommend-scroll-content-bottom .title{
+  height: 40rpx;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  top: -45rpx;
+  font-size: 14px;
+  padding: 5rpx;
+  box-sizing: border-box;
+}
+.title-bottom {
+  height: 40rpx;
+  width: 100%;
+  font-size: 12px;
+  color: #aaaaaa;
+  position: relative;
+  top: -40rpx;
+  left: 20rpx;
+}
+.title-bottom-right image {
+  width: 30rpx;
+  height: 30rpx;
+  float: right;
+  position: relative;
+  right: 30rpx;
+  top: -30rpx;
+}

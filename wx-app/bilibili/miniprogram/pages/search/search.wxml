@@ -1,0 +1,52 @@
+<!-- miniprogram/pages/search/search.wxml -->
+<view class="content">
+  <view class="header">
+    <view class="header-left">
+      <view class="header-left-icon">
+        <image src="../../images/sousuoblack.png" />
+      </view>
+      <input class="{{fontBlack ? 'on' : ''}}" type="text" placeholder="{{serachValue}}" bindtap="getFocus" bindconfirm="inputConfirm"/>
+    </view>
+    <view class="header-right" bindtap="backHome">取消</view>
+  </view>
+  <!-- 头部结束 -->
+  <view class="list hot">
+    <view class="list-title hot-title">
+      <view class="list-title-left hot-title-left">大家都在搜</view>
+      <view class="list-title-right hot-title-right" bindtap="hot_on_off">
+        {{hotSwitch ? '展开' : '收起'}}
+      </view>
+    </view>
+    <view class="list-content hot-content {{hotSwitch? 'unfold' : ''}}">
+      <view class="list-content-block content-block" wx:for="{{topSearch}}">{{item}}</view>
+    </view>
+  </view>
+  <!-- 热搜结束 -->
+  <view class="top-image">
+    <image src="https://i0.hdslb.com/bfs/archive/011696851db16b51d20d41dbbebf665d4017bd4e.png@880w_440h.webp" />
+  </view>
+  <!-- 热搜图结束 -->
+  <view class="list past" wx:if="{{isPastShow}}">
+    <view class="list-title past-title">
+      <view class="list-title-left past-title-left">搜索历史</view>
+      <view class="list-title-right past-title-right" bindtap="past_on_off">
+        {{pastSwitch ? '收起' : '展开'}}
+      </view>
+    </view>
+    <scroll-view class="list-scroll" scroll-y="true" wx:if="{{pastSwitch}}">
+      <view class="list-content-block content-block" wx:for="{{pastSearch}}">{{item}}</view>
+    </scroll-view>
+    <view class="list-content unfold" wx:else>
+      <view class="list-content-block content-block" wx:for="{{pastSearch}}">{{item}}</view>
+    </view>
+    <view class="clear" bindtap="clearPast">
+      <image src="../../images/lajitong.png" />
+      <span>清空搜索历史</span>
+    </view>
+  </view>
+  <!-- 历史记录搜索结束 -->
+  <view>
+    <modal title="确认清除全部历史记录吗？" hidden="{{modalHidden}}" confirm-text="确定" cancel-text="取消" bindconfirm="modalBindaconfirm" bindcancel="modalBindcancel">
+    </modal>
+  </view>
+</view>
