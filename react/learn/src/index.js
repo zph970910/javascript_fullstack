@@ -1,6 +1,14 @@
 // 入口
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Lifecycle from './component/lifecycle'
+import CommentVs from './component/CommentVs'
+import ButtonTest from './component/ButtonTest'
+import Hoc from './component/Hoc'
+import ContextSample from './component/ContextSample'
+import HooksTest from './component/HooksTest'
+import PureComponentTest from './component/PureComponentTest'
+import KFormCreate from './component/KFormCreate'
 // import App from './App'
 
 // class App extends React.Component {
@@ -145,4 +153,7 @@ class FeatureReturnFraments extends React.Component {
   }
 }
 
-ReactDOM.render(<React16 name="猛哥"/>,document.querySelector('#root'))
+
+// ReactDOM.render(<PureComponentTest body='vue is very good' author='youyuxi' />,document.querySelector('#root'))
+// ReactDOM.render(<Hoc state="React"/>,document.querySelector('#root'))
+ReactDOM.render(<KFormCreate />,document.querySelector('#root'))
