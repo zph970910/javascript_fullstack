@@ -15,8 +15,10 @@
     {{message}}
   </div>
   <p>
-    <button onclick="destroy()"></button>
+    <button onclick="destroy()">卸载</button>
   </p>
+  <p><button onclick="reload()">更新</button></p>
+  <p><button onclick="tick()">更改</button></p>
   <script>
     var jspang = Vue.extend({
       template: `<h2>{{message}}</h2>`,
@@ -24,9 +26,31 @@
         return {
           message: 'Hello, I am Jspang'
         }
+      },
+      mounted () {
+        console.log('mounted 被创建')
+      },
+      updated () {
+        console.log('updated 数据更新')
+      },
+      destroyed () {
+        console.log('destroyed 销毁之后')
       }
     })
     var vm = new jspang().$mount('#app')
+
+    function destroy(){
+      vm.$destroy();
+    }
+    function reload(){
+      vm.$forceUpdate()
+    }
+    function tick(){
+      vm.message="update message info ";
+      vm.$nextTick(function(){
+        console.log('message更新完后我被调用了');
+      })
+    }
   </script>
 </body>
 </html>

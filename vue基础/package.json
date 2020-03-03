@@ -12,6 +12,7 @@
   "author": "zph",
   "license": "ISC",
   "dependencies": {
+    "@vue/cli-init": "^4.1.2",
     "jquery": "^3.4.1"
   }
 }
