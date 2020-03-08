@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import Login from './pages/admin/login'
+import routes from './Router'
+import requireLogin from './requireLogin'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  // Redirect 路由重定向
+  render () {
+    return (
+      <Router>
+        <div>
+          <Route exact path="/" render={() => <Redirect to="/web/index" />} />
+          <Route path="/login" component={Login} />
+          {
+            routes.map((route, i) => (
+              <Route key={i} path={route.path} component={
+                route.path.includes('/admin')
+                ? requireLogin(route.component) : route.component
+              }/>
+            ))
+          }
+        </div>
+      </Router>
+    )
+  }
 }
 
-export default App;
+export default App
