@@ -2,7 +2,7 @@ import React from 'react'
 import { Form, Input, Button, Card, Message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import './index.less'
-import Particles from 'reactparticles.js'
+import Particles from 'react-particles-js'
 
 class Login extends React.Component {
   constructor (props) {

@@ -23,10 +23,10 @@ class HeaderCustom extends Component {
 
     const list = menus.filter(v => v.menu)
     const menuList = list.map((item, i) => {
-      return <Menu.Item key={i}>
+      return <Menu.Item key={i} onClick={() => sessionStorage.setItem('webKey', String(i))} >
               <Link to={item.path}>
-                {/* <item.icon /> */}
-                <HomeOutlined />
+                <item.icon />
+                {/* <HomeOutlined /> */}
                 <span className="nav-text">{item.title}</span>
               </Link>
              </Menu.Item>
