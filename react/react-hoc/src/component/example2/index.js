@@ -11,10 +11,11 @@ function HOC(WrappedComponent) {
     }
 
     onChange = (e) => {
+      // this.setState 在这里！！！ 是异步的
       this.setState({
         name: e.target.value
       })
-      // console.log()
+      console.log(this.state.name)
     }
     render () {
       const newProps = {
@@ -29,7 +30,7 @@ function HOC(WrappedComponent) {
 }
 
 // 使用
-@HOC
+// @HOC
 // HOC(Example)
 class Example extends Component {
   render () {
