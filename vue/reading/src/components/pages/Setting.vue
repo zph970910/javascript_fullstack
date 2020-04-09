@@ -56,8 +56,19 @@
             <i class="iconfont icon-more">&#xe015;</i>
           </router-link>
         </div>
-        <div class="border"></div>
-        <div class="sign-out">退出登录</div>
+        <div class="sign-out" @click="logout" v-show="isLogin">
+          退出登录
+        </div>
+        <van-popup
+        v-model="show"
+        round
+        position="bottom"
+        :style="{ height: '30%' }"
+        > 
+          <p class="text">退出后不会删除任何本地数据，下次登录依然可以使用本账号。</p>
+          <div class="login" @click="login">退出登录</div>
+          <div class="cancel" @click="cancel">取消</div>
+        </van-popup>
       </div>
     </div>
   </div>
@@ -69,6 +80,7 @@ import BScroll from 'better-scroll'
 export default {
   data() {
     return {
+      show: false,
       checked1: true,
       checked2: true,
       checked3: false,
@@ -81,6 +93,11 @@ export default {
       ]
     }
   },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin
+    }
+  },
   mounted() {
     this.$nextTick(() => {
       this.scroll = new BScroll(this.$refs.wrapper ,{click: true});
@@ -89,9 +106,19 @@ export default {
   },
   methods: {
     returnMine () {
+      this.$router.go(-1)
+    },
+    logout () {
+      this.show = true
+    },
+    login () {
+      this.$store.commit('logout')
       this.$router.push({
-        path: '/Mine'
+        path: '/Login'
       })
+    },
+    cancel () {
+      this.show = false
     }
   }
 }
@@ -105,18 +132,22 @@ export default {
     margin-top px2rem(40px)
     height px2rem(80px)
     .icon-return
+      line-height px2rem(80px)
       float left
       margin-left px2rem(20px)
       font-size 18px
     span
+      line-height px2rem(80px)
       margin 0 auto
       font-weight 700
       color #000
  .wrapper
-  overflow hidden
-  position relative
-  top 0
-  height px2rem(1400px)
+    overflow hidden
+    position fixed
+    top px2rem(150px)
+    bottom 0
+    left 0
+    right 0
   .van-cell
     .van-cell__title
       span 
@@ -154,8 +185,31 @@ export default {
         font-size 12px
         float right
   .sign-out
-    height px2rem(50px)
-    margin  px2rem(40px) 0
+    height px2rem(80px)
+    line-height px2rem(80px)
+    margin px2rem(40px) 0
     color red
     font-weight 700
+    border-top 1px solid rgba(0,0,0,0.1) 
+    border-bottom 1px solid rgba(0,0,0,0.1)
+  .text
+    height px2rem(180px)
+    padding px2rem(50px)
+    line-height px2rem(50px)
+    font-weight 600
+    color #707070
+    box-sizing border-box
+  .login
+    height px2rem(120px)
+    line-height px2rem(120px)
+    font-size px2rem(36px)
+    font-weight 900
+    color red
+    border-top 1px solid rgba(0,0,0,0.1)
+  .cancel
+    letter-spacing px2rem(6px)
+    height px2rem(120px)
+    line-height px2rem(120px)
+    font-weight 900
+    border-top 1px solid rgba(0,0,0,0.1)
 </style>

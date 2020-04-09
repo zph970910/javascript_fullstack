@@ -2,7 +2,7 @@
   <div class="storyDetail">
     <div class="header">
       <div class="left">
-        <i class="iconfont icon-left" @click="returnMine">&#xe014;</i>
+        <i class="iconfont icon-left" @click="returnPage">&#xe014;</i>
       </div>
       <div class="right">
         <i class="iconfont icon-right" >&#xe019;</i>
@@ -38,9 +38,6 @@
 import BScroll from 'better-scroll'
 
 export default {
-  props: {
-    "id": String
-  },
   data () {
     return {
       data: {}
@@ -52,17 +49,17 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true
       })
-    })
+    });
   },
   methods : {
     getData () {
-      let that = this
+      let id = this.$route.query.id
       this.$http.get('../../../static/data/story.json')
       .then(res => {
         let datas = res.data.data
         console.log(datas)
         if(datas && datas.length > 0) {
-          that.data = datas[that.id]
+          this.data = datas[id]
           } else {
             console.log("not found datas")
             }
@@ -70,10 +67,8 @@ export default {
           console.log("数据加载失败")
       })
     },
-    returnMine () {
-      this.$router.push({
-        path: '/Story'
-      })
+    returnPage () {
+      this.$router.go(-1)
     }
   }
 }

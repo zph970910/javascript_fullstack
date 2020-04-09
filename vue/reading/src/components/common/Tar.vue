@@ -37,11 +37,13 @@ export default {
 @import '../../assets/css/function.styl'
 .tab
   position fixed
+  left 0
+  right 0
   bottom 0
   display flex
   width 100%
-  z-index 1000
-  opacity 1
+  height px2rem(120px)
+  z-index 999
   font-size 14px
   background rgba(0, 0, 0, 0.03)
   padding-top px2rem(20px)

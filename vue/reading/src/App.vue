@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// import Tar from "./components/common/Tar"
+
 export default {
   name: "App",
   components: {
@@ -30,6 +30,14 @@ export default {
   //     }
   //   }
   // };
+  watch:{          
+    items:{
+      handler:function(items){
+        localStore.save(items)   
+      },
+      deep:true
+    }
+  }
 }
 </script>
 

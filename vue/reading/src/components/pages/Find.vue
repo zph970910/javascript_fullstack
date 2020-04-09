@@ -2,18 +2,20 @@
   <div class="find">
     <div class="search">
      <div class="search-wrapper">
-        <v-search-box></v-search-box>
+        <v-search-box>书城</v-search-box>
      </div>
     </div>
     <div class="container">
       <swiper>
         <swiper-slide v-for="(item, index) in book" :key="index" class="swiper-item">
-          <div class="book-img">
-            <img :src="item.url" alt="">
+          <div  @click="bookDetail(item.id)" >
+            <div class="book-img">
+              <img :src="item.url" alt="">
+            </div>
+            <h1>{{item.title}}</h1>
+            <p class="book-author">{{item.author}}</p>
+            <p class="book-text">朋友都在读 》</p>
           </div>
-          <h1>{{item.name}}</h1>
-          <p class="book-author">{{item.author}}</p>
-          <p class="book-text">{{item.text}}</p>
         </swiper-slide>
       </swiper>
     </div>
@@ -26,6 +28,7 @@ import Tar from "../common/Tar"
 import searchBar from '../common/searchBar'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
+import axios from 'axios'
 export default {
   components: {
     "v-search-box": searchBar,
@@ -33,40 +36,32 @@ export default {
   },
   data () {
     return {
-       "book": [
-      {
-        "name": "解忧杂货店",
-        "author": "东野圭吾",
-        "url": "https://wfqqreader-1252317822.image.myqcloud.com/cover/752/449752/t6_449752.jpg",
-        "text": "朋友们都在读 >"
-      },
-      {
-        "name": "一禅小和尚",
-        "author": "一禅小和尚",
-        "url": "https://wfqqreader-1252317822.image.myqcloud.com/cover/898/915898/t6_915898.jpg",
-        "text": "朋友们都在读 >"
-      },
-      {
-        "name": "追风筝的人",
-        "author": "卡勒德·胡赛尼",
-        "url": "https://wfqqreader-1252317822.image.myqcloud.com/cover/339/546339/t6_546339.jpg",
-        "text": "朋友们都在读 >"
-      },
-      {
-        "name": "龙族（1-4合集）",
-        "author": "江南",
-        "url": "https://wfqqreader-1252317822.image.myqcloud.com/cover/334/933334/t6_933334.jpg",
-        "text": "朋友们都在读 >"
-      },
-      {
-        "name": "步履不停",
-        "author": "是枝裕和",
-        "url": "https://wfqqreader-1252317822.image.myqcloud.com/cover/50/861050/t6_861050.jpg",
-        "text": "朋友们都在读 >"
-      }
-    ]
+      book: ''
     }
   },
+  created () {
+    this.getBook()
+    
+  },
+  mounted () {
+    
+  },
+  methods: {
+    getBook () {
+      axios.get('../../../static/data/books.json').then(res => {
+        if (res.status == 200) {
+          this.book = res.data.data
+        }
+      })
+    },
+    bookDetail (id) {
+      this.$router.push({
+        // path: `/bookDetail/${id}`
+        name: 'BookDetail',
+        query: {id: id},
+      })
+    }
+  }
 }
 </script>
 
@@ -75,6 +70,7 @@ export default {
 .find
   height 100%
   .search
+    height 10%
     background rgba(0, 0, 0, 0.05)
     overflow hidden
     .search-wrapper

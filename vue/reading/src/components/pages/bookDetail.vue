@@ -2,16 +2,26 @@
   <div class="bookDetail">
     <div class="header">
       <div class="left">
-        <i class="iconfont icon-left" @click="returnMine">&#xe014;</i>
+        <i class="iconfont icon-left" @click="returnPage">&#xe014;</i>
       </div>
       <div class="right">
-        <i class="iconfont icon-right" >&#xe019;</i>
+        <i class="iconfont icon-right" @click="addBookshelf(id, data)">&#xe019;</i>
         <i class="iconfont icon-right" >&#xe024;</i>
         <i class="iconfont icon-right" >&#xe025;</i>
         <i class="iconfont icon-right" >&#xe026;</i>
         <i class="iconfont icon-right" >&#xe021;</i>
       </div>
     </div>
+    <van-popup class="popup" v-model="loginShow" round :style="{ height: '40%' }">
+      <div class="text">
+        <h1>你还未登录</h1>
+        <p>登录后即可领取专属福利</p>
+        <p>当前已有的无限卡天数和书籍都将同步迁移。</p>
+      </div>
+      <div class="login" @click="login">微信登录</div>
+      <div class="login" @click="login">账号登录</div>
+      <div class="login cancel" @click="cancel">取消</div>
+    </van-popup>
     <div class="wrapper" ref="wrapper">
       <div class="main">
         <div class="h-container" @click="bookRead(item.id)">
@@ -51,7 +61,7 @@
         </div>
         <div class="reading">
           <p>文章内容</p>
-          <span>{{data.content}}</span>
+          <span v-html="data.content"></span>
         </div>
       </div>
     </div>
@@ -62,7 +72,7 @@
             <p class="comment-wrap">{{item.comment}}</p>
             <div class="icon-wrap">
               <div class="left">
-                <i class="iconfont icon-like" >&#xe029;   {{item.likeCount}}</i>
+                <i class="iconfont icon-like" :style="{color: item.islike ? 'red' : ''}" @click="addLikeCount(item.id, item.likeCount)" >&#xe029;   {{item.likeCount}}</i>
               </div>
               <div class="right">
                 <i class="iconfont icon-comment" >&#xe028;   {{item.commentCount}}</i>
@@ -77,7 +87,11 @@
       <div class="bg-wrapper" v-show="IshowDetail">
         <div class="content-wrapper">
           <div class="Iheader">简介</div>
-          <p>{{data.introduction}}</p>
+          <div class="introWrapper" ref="introWrapper">
+            <div>
+              <p>{{data.introduction}}</p>
+            </div>
+          </div>
         </div>
          <i class="iconfont icon-Ihidden" @click="IhideDetail">&#xe027;</i>
       </div>
@@ -87,16 +101,18 @@
 
 <script>
 import BScroll from 'better-scroll'
+import { mapState, mapMutations, mapActions } from 'vuex'
+import * as mutationType from '../../store/mutation-type'
+import { Dialog } from 'vant';
 
 export default {
-  props: {
-    "id": String
-  },
   data () {
     return {
       data: {},
       IshowDetail: false,
-      CshowDetail: false
+      CshowDetail: false,
+      addBook: [],
+      loginShow: false
     }
   },
   mounted () {
@@ -105,7 +121,22 @@ export default {
       this.scroll = new BScroll(this.$refs.wrapper, {
         click: true
       })
+      this.scroll = new BScroll(this.$refs.introWrapper, {
+        click: true
+      })
     })
+    
+  },
+  updated() {
+    
+  },
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    },
+    // isAdd () {
+    //   return this.$store.state.isAdd
+    // }
   },
   created () {
    
@@ -113,20 +144,18 @@ export default {
   methods: {
     getData () {
      let that = this
+     that.id = this.$route.query.id
      this.$http.get('../../../static/data/books.json')
      .then(res => {
        let datas = res.data.data
-       console.log(datas)
+      //  console.log(datas)
        if(datas || datas.length > 0) {
         that.data = datas[that.id]
        }
      })
-     console.log(this.id)
     },
-    returnMine () {
-      this.$router.push({
-        path: '/Bookshelf'
-      })
+    returnPage () {
+      this.$router.go(-1)
     },
     CdetailShow () {
       this.CshowDetail = true
@@ -140,12 +169,42 @@ export default {
     IhideDetail () {
       this.IshowDetail = false
     },
+    addLikeCount (id, count) {
+      this.data.comments[id].islike = !this.data.comments[id].islike
+      if (this.data.comments[id].islike) {
+        this.data.comments[id].likeCount = count + 1
+      } else {
+        this.data.comments[id].likeCount = count - 1
+      }
+    },
     bookRead (id) {
       this.$router.push({
         path: `/Bookshelf/${id}/bookRead`
       })
+    },
+    addBookshelf() {
+      if (this.isLogin) {
+        if (!this.data.isAdd) {
+          Dialog.alert({
+            title: '提示',
+            message: '成功加入书架'
+          })
+          this.$store.commit("addbook", this.data)
+          this.data.isAdd = true
+        }
+      } else {
+        this.loginShow = true
+      }
+    },
+    login () {
+      this.$router.push({
+        path: '/Login'
+      })
+    },
+    cancel () {
+      this.loginShow = false
     }
-  }
+  },
   
 }
 </script>
@@ -156,7 +215,7 @@ export default {
 .bookDetail
   .header
     height px2rem(80px)
-    margin-top px2rem(40px)
+    margin-top px2rem(30px)
     width 100%
     .left
       float left
@@ -175,19 +234,44 @@ export default {
         display inline-block
         font-size 24px
         color #707070
+  .popup 
+    width px2rem(600px)
+    .text
+      margin px2rem(60px)
+      h1
+        font-size px2rem(42px)
+        font-weight 900
+        color #000
+        margin-bottom px2rem(30px)
+      p
+        font-size px2rem(32px)
+        color #707070
+        margin-bottom px2rem(5px)
+        line-height px2rem(40px)
+    .login
+      height px2rem(96px)
+      line-height px2rem(96px)
+      font-size px2rem(36px)
+      font-weight 600
+      color #336afc
+      border-top 1px solid rgba(0,0,0,0.1)
+    .cancel
+      letter-spacing px2rem(6px)
+      height px2rem(84px)
+      line-height px2rem(84px)
   .wrapper
-    border 2px solid rgba(0, 0, 0, 0.1)
-    height px2rem(1380px)
-    border-radius 30px
-    margin px2rem(30px)
     overflow hidden
+    position fixed
+    left 0
+    right 0
+    top px2rem(140px)
+    bottom 0
     .main
       .h-container
-        padding-top px2rem(80px)
-        
+        // padding-top px2rem(80px)
         img
-          width px2rem(340px)
-          height px2rem(430px)
+          width px2rem(800px)
+          height px2rem(400px)
         h1
           font-size 24px
           font-weight 900
@@ -240,13 +324,14 @@ export default {
             color rgba(0, 0, 0, .5)
             text-align left
       .content
-        padding  px2rem(50px)  px2rem(80px)
+        padding  px2rem(50px)  px2rem(50px)
         border-bottom 1px solid rgba(0, 0, 0, .5)
         .header
           text-align left
           display flex
           align-items center
           span
+            
             font-size 24px
             font-weight 1000
             color #000
@@ -263,7 +348,7 @@ export default {
             font-size 16px
             font-weight 600
             color rgba(0, 0, 0, .7)
-            text-indent px2rem(40px)
+            text-indent px2rem(50px)
             line-height px2rem(50px)
             letter-spacing px2rem(3px)
             overflow hidden
@@ -285,7 +370,7 @@ export default {
           font-weight 1000
           color #000
           margin-bottom px2rem(40px)
-          padding-left px2rem(40px)
+          // padding-left px2rem(40px)
         span 
           display block
           font-size 16px
@@ -295,7 +380,15 @@ export default {
           letter-spacing px2rem(3px)
           text-indent px2rem(80px)
           text-align left
-
+          p
+            display block
+            font-size 16px
+            font-weight 600
+            color rgba(0, 0, 0, .8)
+            line-height px2rem(50px)
+            letter-spacing px2rem(3px)
+            text-indent px2rem(80px)
+            text-align left
   .bg-wrapper
     position fixed
     top 0
@@ -307,23 +400,31 @@ export default {
     backdrop-filter blur(10px)
     .content-wrapper
       margin px2rem(50px) auto
-      width px2rem(700px)
-      height px2rem(1100px)
+      width 80%
+      height 75%
       background rgba(7, 17, 27, 0.7)
       border-radius 20px
       padding px2rem(50px)
+      overflow hidden
       .Iheader
         text-align left
         font-size 20px
         font-weight 700
         color #fff
-      p
+      .introWrapper
+       overflow hidden
+       position fixed
+       left 10%
+       right 10%
+       top 10%
+       bottom 16%
+       p
         margin-top px2rem(60px)
         text-align left
-        font-size 16px
+        font-size 90%
         font-weight 500
         color rgba(255, 255, 255, 0.7)
-        text-indent px2rem(40px)
+        text-indent px2rem(80px)
         line-height px2rem(60px)
         letter-spacing px2rem(3px)
     .icon-Ihidden

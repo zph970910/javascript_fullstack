@@ -6,14 +6,14 @@
     </div>
     <div class="headImage">
       <span>头像</span>
-      <img src="../../assets/images/headImage.jpg" alt="">
+      <img :src="headImage" alt="">
     </div>
     <van-cell-group>
-      <van-field v-model="message1" label="昵称" type="textarea" placeholder="请输入昵称" rows="1" autosize size="large" input-align="right" label-align="left" label-width="40px"/>
-      <van-field v-model="message2" label="介绍自己" type="textarea" placeholder="可以说说你的职业或爱好" rows="1" size="large" autosize input-align="right" label-align="left" label-width="70px"/>
-      <van-field v-model="message3" label="签名" type="textarea" placeholder="请输入签名" rows="1" size="large" autosize input-align="right" label-align="left" label-width="40px"/>
+      <van-field @input="inputName" v-model="username" label="昵称" type="textarea" placeholder="请输入昵称" rows="1" autosize size="large" input-align="right" label-align="left" label-width="40px"/>
+      <van-field @input="inputHobby" v-model="hobby" label="介绍自己" type="textarea"  maxlength="20" placeholder="可以说说你的职业或爱好" rows="1" size="large" autosize input-align="right" label-align="left" label-width="70px"/>
+      <van-field @input="inputIntro" v-model="introduce" label="签名" type="textarea"  maxlength="30" placeholder="请输入签名" rows="2" size="large" autosize input-align="right" label-align="left" label-width="40px"/>
     </van-cell-group>
-    .
+    
   </div>
 </template>
 
@@ -22,20 +22,45 @@ export default {
   data () {
     return {
       show: false,
-      message1: '',
-      message2: '',
-      message3: '',
-      currentDate: new Date()
+      username: '',
+      hobby: '',
+      introduce: '',
     }
+  },
+  created () {
+    this.username = this.$store.state.user[this.i].username,
+    this.hobby = this.$store.state.user[this.i].hobby,
+    this.introduce = this.$store.state.user[this.i].introduce
+  },
+  mounted () {
+    
+  },
+  computed: {
+    i () {
+      return this.$store.state.i
+    },
+    headImage () {
+      return this.$store.state.user[this.i].headImage
+    },
   },
   methods: {
     showPopup () {
       this.show = true
     },
     returnMine () {
-      this.$router.push({
-        path: '/Mine'
-      })
+      this.$router.go(-1)
+    },
+    inputName (value) {
+      this.username == value
+      this.$store.commit('setUsername', this.username)
+    },
+    inputHobby (value) {
+      this.hobby == value
+      this.$store.commit('setHobby', this.hobby)
+    },
+    inputIntro (value) {
+      this.introduce == value
+      this.$store.commit('setIntro', this.introduce)
     }
   }
 }

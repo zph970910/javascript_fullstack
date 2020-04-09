@@ -2,12 +2,15 @@
   <div class="message">
     <i class="iconfont icon-return" @click="returnMine">&#xe014;</i>
     <div class="container">
-      <router-link to="/inform" class="content">
-        <span class="inform">通知</span>
-      </router-link>
-      <router-link to="/chat" class="content">
+      <ul>
+      <router-link to="/Message/Chat" class="content">
         <span class="chat">私信</span>
       </router-link>
+      <router-link to="/Message/Inform" class="content">
+        <span class="inform">通知</span>
+      </router-link>
+      </ul>
+      <router-view></router-view>
     </div>
   </div>
 </template>

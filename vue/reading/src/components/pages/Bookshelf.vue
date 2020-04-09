@@ -2,7 +2,7 @@
   <div class="main">
     <div class="search">
       <div class="search-wrapper">
-        <v-search></v-search>
+        <v-search-box>编辑</v-search-box>
       </div>
     </div>
     <div class="wrapper" ref="wrapper">
@@ -22,11 +22,11 @@
             <img :src="item.url" alt="">
             <div class="name">{{item.title}}</div>
           </li>
-         <div class="add">
+         <div class="add" @click="toBookStore">
            <i class="iconfont icon-add">&#xe016;</i>
          </div>
         </ul>
-        <div class="count">5本公开阅读 · 0本私密阅读</div>
+        <div class="count">{{book.length}}本公开阅读 · 0本私密阅读</div>
       </div>
     </div>
     <v-tar></v-tar>
@@ -35,40 +35,49 @@
 
 <script>
 import Tar from "../common/Tar"
-import searchBar from '../common/searchBar2'
+import searchBar from '../common/searchBar'
 import BScroll from 'better-scroll'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   components: {
-    "v-search": searchBar,
+    "v-search-box": searchBar,
     "v-tar": Tar
   },
   data () {
     return {
-      book: []
+      book: [],
+      addBookshelf:[]
     }
   },
   created () {
-    this.$http.get('../../../static/data/books.json')
-    .then(res => {
-      console.log(res)
-      if(res.data.errno == 0) {
-        this.book = res.data.data
-        console.log(this.book)
-      }
-    })
+    this.book = this.$store.state.addbook
+  },
+  computed: {
+    
   },
   mounted() {
       this.$nextTick(() => {
         this.scroll = new BScroll(this.$refs.wrapper ,{click: true});
       })
+      // console.log(this.$store.state.addbook)
+    },
+    updated() {
+      
     },
   methods: {
     bookDetail (id) {
       this.$router.push({
-        path: `/bookDetail/${id}`
+        // path: `/bookDetail/${id}`
+        name: 'BookDetail',
+        query: {id: id},
       })
     },
+    toBookStore () {
+      this.$router.push({
+        path: '/bookStore'
+      })
+    }
   }
 }
 </script>
@@ -83,8 +92,12 @@ export default {
     .search-wrapper
       margin px2rem(30px)
   .wrapper
-    height px2rem(1250px)
     overflow hidden
+    position fixed
+    top px2rem(150px)
+    bottom px2rem(140px)
+    left 0
+    right 0
     .main
       height px2rem(1500px)
       .container

@@ -1,19 +1,15 @@
 <template>
   <div class="inform">
-    <v-message></v-message>
     <div class="inform-content">
       当前暂无通知
     </div>
   </div>
-  
 </template>
 
 <script>
-import Message from '../common/Message'
+
 export default {
-  components: {
-    'v-message': Message
-  }
+  
 }
 </script>
 

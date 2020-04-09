@@ -1,6 +1,5 @@
 <template>
   <div class="chat">
-    <v-message></v-message>
     <div class="chat-content">
       当前暂无私信
     </div>
@@ -8,11 +7,9 @@
 </template>
 
 <script>
-import Message from '../common/Message'
+
 export default {
-  components: {
-    'v-message': Message
-  }
+  
 }
 </script>
 
