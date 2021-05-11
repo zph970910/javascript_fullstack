@@ -4,7 +4,7 @@
   "description": "# dist 存放打包之后的文件",
   "main": "webpack.config.js",
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "webpack-cli": "^3.3.10",
     "webpack": "^4.41.4"
   },
